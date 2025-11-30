@@ -29,17 +29,19 @@
 .header {
   display: grid;
   gap: 20px;
-  inline-size: var(--page-block-width);
-  block-size: var(--page-block-height);
+  inline-size: min(var(--page-block-width), 100vw);
+  min-block-size: 368px;
   background-color: var(--accent-color);
   border: solid 2px var(--main-color);
   margin-bottom: 50px;
+  inline-size: 100%;
+  margin-top: 100px;
 }
 
 .header__logo {
   align-self: end;
   justify-self: center;
-  font-family: var(--font_accent);
+  font-family: var(--font_accent), fantasy;
   font-size: clamp(49px, 5vw, 65px);
   font-weight: 400;
 }
@@ -47,7 +49,7 @@
 .header__title {
   align-self: start;
   justify-self: center;
-  font-family: var(--font_accent);
+  font-family: var(--font_accent), fantasy;
   font-size: clamp(14px, 2.5vw, 23px);
   font-weight: 400;
   text-transform: uppercase;
@@ -55,17 +57,27 @@
 
 .main {
   display: grid;
+  justify-content: center;
+  inline-size: min(var(--page-block-width), 100vw);
   gap: 50px;
+  inline-size: 100%;
+  margin-bottom: 100px;
 }
 
-.main__section {
+.main__article {
   display: grid;
   background-color: var(--accent-color);
   border: solid 2px var(--main-color);
-  inline-size: var(--page-block-width);
+  inline-size: 100%;
+  max-inline-size: var(--page-block-width);
 }
 
-.main__section-title {
+.main__article-last {
+  display: flex;
+  justify-content: center;
+}
+
+.main__article-title {
   font-size: 18px;
   font-variation-settings: "wght" var(--font-weight_title-text);
   padding: 4px 10px;
@@ -77,7 +89,11 @@
 
 .main__image-wrapper-img {
   display: block;
+  object-fit: fill;
   width: 100%;
+  max-height: 696px;
+  border-top: 2px solid var(--main-color);
+  border-bottom: 2px solid var(--main-color);
 }
 
 .card__image-blur {
@@ -114,7 +130,7 @@
 
 .main__image-wrapper-label {
   position: absolute;
-  font-family: var(--font_accent);
+  font-family: var(--font_accent), fantasy;
   font-size: 14px;
   top: 25px;
   right: 25px;
@@ -135,11 +151,13 @@
   }
 }
 
-.main__section-text {
+.main__article-text {
   display: grid;
   gap: 25px;
   padding: 25px;
   font-size: 18px;
+  line-height: 21px;
+  font-variation-settings: "wght" var(--font-weight_main-text);
 }
 
 .main__buttons {
@@ -238,13 +256,8 @@
 }
 
 .card__like-button {
-  position: relative;
-  overflow: hidden;
-  background-color: var(--accent-color);
-  border: solid 2px var(--main-color);
   inline-size: 130px;
   block-size: 38px;
-  transition: 0.3s ease;
 }
 
 .card__like-button:focus {
@@ -255,24 +268,12 @@
   box-shadow: 2px 2px 0 var(--main-color);
 }
 
-.card__like-button::before {
-  position: absolute;
-  z-index: 0;
-  inset: 0;
-  content: "";
-  background-color: var(--main-color);
-  transform-origin: left center;
-  color: var(--accent-color);
-  transform: scaleX(0);
-  transition: transform 0.5s ease-in-out;
-}
-
 .main__buttons:hover .card__like-button::before {
   transform: scaleX(1);
 }
 
 .button__text {
-  font-family: var(--font_accent);
+  font-family: var(--font_accent), fantasy;
   font-size: 14px;
   z-index: 1;
   mix-blend-mode: difference;
@@ -280,48 +281,28 @@
   color: var(--accent-color);
 }
 
-.footer {
-  justify-self: center;
-  padding-bottom: 100px;
-}
-
-.footer__button {
-  position: relative;
+.article__button {
   inline-size: 335px;
   block-size: 55px;
-  border: 2px solid var(--main-color);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: 0.3s ease;
 }
 
-.footer__button:focus {
+.article__button:focus {
   outline: none;
 }
 
-.footer__button:focus-visible {
+.article__button:focus-visible {
   box-shadow: 2px 2px 0 var(--main-color);
 }
 
-.footer__button::before {
-  position: absolute;
-  z-index: 0;
-  inset: 0;
-  content: "";
-  background-color: var(--main-color);
-  transform-origin: left center;
-  color: var(--accent-color);
-  transform: scaleX(0);
-  transition: transform 0.5s ease-in-out;
-}
-
-.footer__button:hover::before {
+.article__button:hover::before {
   transform: scaleX(1);
 }
 
-.footer__floppy {
+.article__floppy {
   width: 21px;
   height: 21px;
   position: relative;
@@ -331,7 +312,7 @@
   mix-blend-mode: difference;
 }
 
-.footer__save-dialog {
+.article__save-dialog {
   border: 2px solid var(--main-color);
   padding: 0;
   inline-size: 353px;
@@ -340,7 +321,7 @@
   background-color: var(--accent-color);
 }
 
-.footer__save-dialog[open] {
+.article__save-dialog[open] {
   display: block;
 }
 
@@ -358,7 +339,7 @@
 }
 
 .dialog__title {
-  font-family: var(--font_accent);
+  font-family: var(--font_accent), fantasy;
   font-size: 14px;
   font-weight: 400;
   text-transform: uppercase;
@@ -369,16 +350,40 @@
   padding: 0 30px 30px 30px;
 }
 
-.footer__button-ok {
+.article__button-ok {
+  inline-size: 100%;
+  max-inline-size: 293px;
+  block-size: 38px;
+}
+
+.article__button-ok:hover::before {
+  transform: scaleX(1);
+}
+
+.article__button-ok:focus {
+  outline: none;
+}
+
+.article__button-ok:focus-visible {
+  box-shadow: 2px 2px 0 var(--main-color);
+}
+
+.dialog__text {
+  text-transform: uppercase;
+}
+
+.article__save-dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.buttons {
   position: relative;
   background-color: var(--accent-color);
-  inline-size: 293px;
-  block-size: 38px;
   border: 2px solid var(--main-color);
   transition: 0.3s ease;
 }
 
-.footer__button-ok::before {
+.buttons::before {
   position: absolute;
   z-index: 0;
   inset: 0;
@@ -390,40 +395,24 @@
   transition: transform 0.5s ease-in-out;
 }
 
-.footer__button-ok:hover::before {
-  transform: scaleX(1);
-}
-
-.footer__button-ok:focus {
-  outline: none;
-}
-
-.footer__button-ok:focus-visible {
-  box-shadow: 2px 2px 0 var(--main-color);
-}
-
-.dialog__text {
-  text-transform: uppercase;
-}
-
-.footer__save-dialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.75);
-}
-
 @media (width <= 375px) {
   .header {
-    max-block-size: 327px;
+    min-block-size: 327px;
   }
 
-  .footer__button {
+  .article__button {
     display: flex;
     flex-direction: column;
-    inline-size: 306px;
+    max-inline-size: 306px;
     block-size: 84px;
   }
 
-  .footer__floppy {
+  .article__floppy {
     width: 28px;
     height: 28px;
+  }
+
+  .main__image-wrapper-img {
+    max-height: 371px;
   }
 }

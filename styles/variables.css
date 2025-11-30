@@ -21,7 +21,6 @@
     #1a1a1a 100%
   );
   --page-block-width: clamp(375px, 100vw, 700px);
-  --page-block-height: clamp(327px, 100vh, 368px);
   --main-color: #000;
   --accent-color: #fff;
   --heart-contour: #000;
