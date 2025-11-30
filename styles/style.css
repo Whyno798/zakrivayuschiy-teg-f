@@ -29,7 +29,7 @@
 .header {
   display: grid;
   gap: 20px;
-  inline-size: min(var(--page-block-width), 100vw);
+  max-inline-size: min(var(--page-block-width), 100vw);
   min-block-size: 368px;
   background-color: var(--accent-color);
   border: solid 2px var(--main-color);
@@ -58,7 +58,7 @@
 .main {
   display: grid;
   justify-content: center;
-  inline-size: min(var(--page-block-width), 100vw);
+  max-inline-size: min(var(--page-block-width), 100vw);
   gap: 50px;
   inline-size: 100%;
   margin-bottom: 100px;
