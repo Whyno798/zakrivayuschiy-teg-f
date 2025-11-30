@@ -240,7 +240,6 @@
 .card__like-button {
   position: relative;
   overflow: hidden;
-  border: none;
   background-color: var(--accent-color);
   border: solid 2px var(--main-color);
   inline-size: 130px;
