@@ -30,7 +30,7 @@
   display: grid;
   gap: 20px;
   max-inline-size: min(var(--page-block-width), 100vw);
-  min-block-size: 368px;
+  padding-block: clamp(120.5px, 10vh, 129px);
   background-color: var(--accent-color);
   border: solid 2px var(--main-color);
   margin-bottom: 50px;
@@ -396,10 +396,6 @@
 }
 
 @media (width <= 375px) {
-  .header {
-    min-block-size: 327px;
-  }
-
   .article__button {
     display: flex;
     flex-direction: column;
